@@ -21,17 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        
         if let user = Auth.auth().currentUser {
             FirestoreService.shared.getUserData(muser: user) { (result) in
                 switch result {
                 case .success(let muser):
-                    let mainTabBar = MainTabBarController(currentUser: muser)
-                    mainTabBar.modalPresentationStyle = .fullScreen
-                    self.window?.rootViewController = mainTabBar
-//                    let mainTabBarVC = MainTabBarController()
-//                    mainTabBarVC.setCurrentUser(user: muser)
-//                    self.window?.rootViewController = mainTabBarVC
+//                    let mainTabBar = MainTabBarController(currentUser: muser)
+//                    mainTabBar.modalPresentationStyle = .fullScreen
+//                    self.window?.rootViewController = mainTabBar
+                    let mainTabBarVC = MainTabBarController()
+                    mainTabBarVC.setCurrentUser(user: muser)
+                    self.window?.rootViewController = mainTabBarVC
                 case .failure(_):
                     self.window?.rootViewController = AuthViewController()
                 }
@@ -70,6 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+   
 
 }
 

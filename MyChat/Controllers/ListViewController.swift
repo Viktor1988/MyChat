@@ -11,6 +11,9 @@ import FirebaseFirestore
 
 class ListViewController: UIViewController {
     
+    let notifications = NotificationService()
+    
+    
     var activeChats = [MChat]()
     var waitingChats = [MChat]()
     
@@ -68,6 +71,8 @@ class ListViewController: UIViewController {
                 }
                 self.waitingChats = chats
                 self.reloadData()
+                
+                
             case .failure(let error):
                 self.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
@@ -228,7 +233,7 @@ extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let chat = self.dataSource?.itemIdentifier(for: indexPath) else { return }
         guard let section = Section(rawValue: indexPath.section) else { return }
-        let muser = MUser(username: chat.friendUsername, email: "test@mail.ru", avatarStringURL: chat.friendAvatarStringUrl, description: "nil", sex: "nil", id: chat.friendId)
+      
         switch section {
         case .waitingChats:
             let chatRequestVC = ChatRequestViewController(chat: chat)
@@ -236,10 +241,8 @@ extension ListViewController: UICollectionViewDelegate {
             self.present(chatRequestVC, animated: true, completion: nil)
         case .activeChats:
             print(indexPath)
-            let profileVC = ProfileViewViewController(user: muser)
-            self.present(profileVC, animated: true, completion: nil)
-//            let chatsVC = ChatsViewController(user: currentUser, chat: chat)
-//            navigationController?.pushViewController(chatsVC, animated: true)
+            let chatsVC = ChatsViewController(user: currentUser, chat: chat)
+            navigationController?.pushViewController(chatsVC, animated: true)
         }
     }
 }

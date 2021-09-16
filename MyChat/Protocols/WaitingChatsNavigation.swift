@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol WaitingChatsNavigation:class {
+protocol WaitingChatsNavigation:AnyObject {
     func removeWaitingChat(chat: MChat)
     func chatToActive(chat: MChat)
     

@@ -186,13 +186,13 @@ class  AuthViewController: UIViewController {
                             case .success(let user):
                                 self.showAlert(with: "Успешно", and: "Вы авторизованы") {
                                     let muser = MUser(username: user.username, email: user.email, avatarStringURL: user.avatarStringURL, description: user.description, sex: user.sex, id: user.id)
-                                    let mainTabBar = MainTabBarController(currentUser: muser)
-                                    mainTabBar.modalPresentationStyle = .fullScreen
-                                    self.present(mainTabBar, animated: true, completion: nil)
-//                                    let mainTabBar = MainTabBarController()
-//                                    mainTabBar.setCurrentUser(user: muser)
+//                                    let mainTabBar = MainTabBarController(currentUser: muser)
 //                                    mainTabBar.modalPresentationStyle = .fullScreen
 //                                    self.present(mainTabBar, animated: true, completion: nil)
+                                    let mainTabBar = MainTabBarController()
+                                    mainTabBar.setCurrentUser(user: muser)
+                                    mainTabBar.modalPresentationStyle = .fullScreen
+                                    self.present(mainTabBar, animated: true, completion: nil)
                                 }
                             case .failure(_):
                                 self.showAlert(with: "Успешно", and: "Вы зарегистрированны") {

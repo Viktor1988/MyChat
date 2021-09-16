@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AuthNavigationDelegate: class {
+protocol AuthNavigationDelegate: AnyObject {
     func toLoginVC()
     func toSignUpVC()
 }

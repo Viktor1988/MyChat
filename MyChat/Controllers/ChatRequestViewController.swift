@@ -23,6 +23,7 @@ class ChatRequestViewController: UIViewController {
     init(chat: MChat) {
         self.chat = chat
         nameLabel.text = chat.friendUsername
+        aboutMeLabel.text = ""
         imageView.sd_setImage(with: URL(string: chat.friendAvatarStringUrl), completed: nil)
         super.init(nibName: nil, bundle: nil )
     }
